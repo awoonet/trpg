@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: %i[ show edit update destroy ]
+  before_action :set_vars
 
   # GET /locations or /locations.json
   def index
@@ -66,5 +67,15 @@ class LocationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def location_params
       params.require(:location).permit(:name)
+    end
+
+    def set_vars
+      @model = Location
+      @index_path = locations_path
+      @new_path = new_location_path
+      if @location
+        @record = @location
+        @edit_path = edit_location_path(@location)
+      end
     end
 end

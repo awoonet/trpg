@@ -1,5 +1,6 @@
 class CharactersController < ApplicationController
   before_action :set_character, only: %i[ show edit update destroy ]
+  before_action :set_vars
 
   # GET /characters or /characters.json
   def index
@@ -66,5 +67,15 @@ class CharactersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def character_params
       params.require(:character).permit(:name)
+    end
+
+    def set_vars
+      @model = Character
+      @index_path = characters_path
+      @new_path = new_character_path
+      if @character
+        @record = @character
+        @edit_path = edit_character_path(@character)
+      end
     end
 end

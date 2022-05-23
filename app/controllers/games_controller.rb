@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[ show edit update destroy ]
+  before_action :set_vars
 
   # GET /games or /games.json
   def index
@@ -66,5 +67,15 @@ class GamesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def game_params
       params.require(:game).permit(:name)
+    end
+
+    def set_vars
+      @model = Game
+      @index_path = games_path
+      @new_path = new_game_path
+      if @game
+        @record = @game
+        @edit_path = edit_game_path(@game)
+      end
     end
 end

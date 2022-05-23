@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_vars
 
   # GET /posts or /posts.json
   def index
@@ -66,5 +67,15 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:content)
+    end
+
+    def set_vars
+      @model = Post
+      @index_path = posts_path
+      @new_path = new_post_path
+      if @post
+        @record = @post
+        @edit_path = edit_post_path(@post)
+      end
     end
 end
