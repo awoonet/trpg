@@ -1,12 +1,3 @@
 = render 'common/notice'
-
-.row.align-items-start
-  .col
-    h1 = @model.humanize
-  .col
-    = link_to "New #{@model.name}", @new_path
-
-div id="#{@model.name}"
-  - @model.each do |record|
-    p
-      = link_to record.name, record
+= render 'common/index_header'
+= render 'collection'

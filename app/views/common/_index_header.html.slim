@@ -1,0 +1,5 @@
+.row.align-items-start
+  .col
+    h1 = @model.name.humanize.pluralize
+  .col
+    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary"

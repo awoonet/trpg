@@ -1,0 +1,4 @@
+div id="#{@model.name}"
+  - @model.all.each do |record|
+    p
+      = link_to record.name, record
