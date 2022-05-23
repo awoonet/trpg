@@ -1,0 +1,8 @@
+- if model.errors.any?
+  .alert.alert-danger role="alert"
+    h2 
+      = "#{pluralize(model.errors.count, "error")} prohibited this character from being saved:"
+
+    ul
+      - model.errors.each do |error|
+        li = error.full_message 

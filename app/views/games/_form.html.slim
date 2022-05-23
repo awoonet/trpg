@@ -1,0 +1,8 @@
+= render 'common/errors'
+= form_with(model: @model) do |form|
+  div
+    = form.label :name, style: "display: block"
+    = form.text_field :name
+
+  div
+    = form.submit
