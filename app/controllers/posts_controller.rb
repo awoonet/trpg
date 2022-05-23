@@ -71,11 +71,11 @@ class PostsController < ApplicationController
 
     def set_vars
       @model = Post
-      @index_path = posts_path
-      @new_path = new_post_path
+      @index_path = game_location_posts_path
+      @new_path = new_game_location_post_path
       if @post
         @record = @post
-        @edit_path = edit_post_path(@post)
+        @edit_path = edit_game_location_post_path(@post)
       end
     end
 end

@@ -71,11 +71,11 @@ class CharactersController < ApplicationController
 
     def set_vars
       @model = Character
-      @index_path = characters_path
-      @new_path = new_character_path
+      @index_path = game_characters_path
+      @new_path = new_game_character_path
       if @character
         @record = @character
-        @edit_path = edit_character_path(@character)
+        @edit_path = edit_game_character_path(@character)
       end
     end
 end

@@ -71,11 +71,11 @@ class LocationsController < ApplicationController
 
     def set_vars
       @model = Location
-      @index_path = locations_path
-      @new_path = new_location_path
+      @index_path = game_locations_path
+      @new_path = new_game_location_path
       if @location
         @record = @location
-        @edit_path = edit_location_path(@location)
+        @edit_path = edit_game_location_path(@location)
       end
     end
 end
