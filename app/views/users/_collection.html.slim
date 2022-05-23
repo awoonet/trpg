@@ -1,4 +1,13 @@
 div id="#{@model.name}"
-  - @model.all.each do |record|
-    p
-      = link_to record.name, record
+  table 
+    thead
+      tr 
+        th User 
+        th Email
+    tbody
+      - @model.all.each do |record|
+        tr
+          td
+            = link_to record.name, record
+          td
+            = record.email

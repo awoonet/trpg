@@ -1,8 +1,7 @@
-= render 'common/errors', model: @record
 = form_with(model: @record) do |form|
   div
-    = form.label :name, style: "display: block"
-    = form.text_field :name
+    = form.label :name, class: "form-label"
+    = form.text_field :name, class: "form-control"
 
   div
-    = form.submit
+    = form.submit "Add #{@model.name.humanize}", class: "btn btn-primary"
