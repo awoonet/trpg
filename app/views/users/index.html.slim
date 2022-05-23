@@ -1,11 +1,12 @@
 = render 'common/notice'
 
-h1 Users
+.row.align-items-start
+  .col
+    h1 = @model.humanize
+  .col
+    = link_to "New #{@model.name}", @new_path
 
-div#users
-  - @users.each do |user|
-    = render user
+div id="#{@model.name}"
+  - @model.each do |record|
     p
-      = link_to "Show this user", user
-
-= link_to "New user", new_user_path
+      = link_to record.name, record

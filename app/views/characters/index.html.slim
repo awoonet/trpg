@@ -7,6 +7,6 @@
     = link_to "New #{@model.name}", @new_path
 
 div id="#{@model.name}"
-  - @model.each do |model|
+  - @model.each do |record|
     p
-      = link_to model.name, model
+      = link_to record.name, record

@@ -1,10 +1,8 @@
-p.alert.alert-primary role="alert"
-  = notice
-
-= render @user
+= render 'common/notice'
+= render 'record'
 
 div
-  = link_to "Edit this user", edit_user_path(@user)
-  = link_to "Back to users", users_path
+  = link_to "Edit this #{@model.name}", @edit_path
+  = link_to "Back to #{@model.name.pluralize}", @index_path
 
-  = button_to "Destroy this user", @user, method: :delete
+  = button_to "Destroy this #{@model.name}", @record, method: :delete

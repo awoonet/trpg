@@ -1,9 +1,9 @@
-h1 Editing character
+h1 = "Editing #{@model.name}"
 
-= render "form", character: @character
+= render "form"
 
 br
 
 div
-  = link_to "Show this character", @character
-  = link_to "Back to characters", characters_path
+  = link_to "Show this #{@model.name}", @record
+  = link_to "Back to #{@model.name.pluralize}", @index_path

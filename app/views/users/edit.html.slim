@@ -1,9 +1,9 @@
-h1 Editing user
+h1 = "Editing #{@model.name}"
 
-= render "form", user: @user
+= render "form"
 
 br
 
 div
-  = link_to "Show this user", @user
-  = link_to "Back to users", users_path
+  = link_to "Show this #{@model.name}", @record
+  = link_to "Back to #{@model.name.pluralize}", @index_path
