@@ -7,13 +7,17 @@
         - user.errors.each do |error|
           li = error.full_message
 
-  div
+  div.field
     = form.label :email, style: "display: block"
     = form.text_field :email
 
-  div
-    = form.label :password, style: "display: block"
-    = form.text_field :password
+  div.field
+    = form.label :password
+    = form.password_field :password
+
+  div.field
+    = form.label :password_confirmation
+    = form.password_field :password_confirmation
 
   div
     = form.submit
