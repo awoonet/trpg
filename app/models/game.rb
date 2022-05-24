@@ -3,4 +3,7 @@ class Game < ApplicationRecord
 
   has_many :locations
   has_many :characters
+  
+  has_many :games_admins
+  has_many :admins, through: :games_admins
 end

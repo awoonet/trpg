@@ -9,4 +9,7 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   has_many :characters
+
+  has_many :games_admins
+  has_many :games, through: :games_admins
 end
