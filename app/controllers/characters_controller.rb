@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
 
   # GET /characters or /characters.json
   def index
-    @characters = Character.all
+    @characters = @model.all
     super
   end
 
@@ -15,7 +15,7 @@ class CharactersController < ApplicationController
 
   # GET /characters/new
   def new
-    @character = Character.new
+    @character = @model.new
     super
   end
 
@@ -26,46 +26,34 @@ class CharactersController < ApplicationController
 
   # POST /characters or /characters.json
   def create
-    @character = Character.new(character_params)
+    @character = @model.new(character_params)
 
-    respond_to do |format|
-      if @character.save
-        format.html { redirect_to character_url(@character), notice: "Character was successfully created." }
-        format.json { render :show, status: :created, location: @character }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @character.errors, status: :unprocessable_entity }
-      end
+    if @character.save
+      redirect_to game_characters_path(@character), notice: "#{@model.name.pluralize} was successfully created."
+    else
+      redirect_to new_game_character_path, alert: "Error! #{@model.name.pluralize} was not created."
     end
   end
 
   # PATCH/PUT /characters/1 or /characters/1.json
   def update
-    respond_to do |format|
-      if @character.update(character_params)
-        format.html { redirect_to character_url(@character), notice: "Character was successfully updated." }
-        format.json { render :show, status: :ok, location: @character }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @character.errors, status: :unprocessable_entity }
-      end
+    if @character.update(character_params)
+      redirect_to game_characters_path(@character), notice: "#{@model.name.pluralize} was successfully updated."
+    else
+      redirect_to edit_game_character_path(@character), alert: "Error! #{@model.name.pluralize} was not saved."
     end
   end
 
   # DELETE /characters/1 or /characters/1.json
   def destroy
     @character.destroy
-
-    respond_to do |format|
-      format.html { redirect_to characters_url, notice: "Character was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to @index_path, notice: "Character was successfully destroyed."
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_character
-      @character = Character.find(params[:id])
+      @character = @model.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
