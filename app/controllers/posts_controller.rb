@@ -5,19 +5,23 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+    super
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    super
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    super
   end
 
   # GET /posts/1/edit
   def edit
+    super
   end
 
   # POST /posts or /posts.json
@@ -73,6 +77,7 @@ class PostsController < ApplicationController
       @model = Post
       @index_path = game_location_posts_path
       @new_path = new_game_location_post_path
+      @view = @model.name.pluralize.downcase
       if @post
         @record = @post
         @edit_path = edit_game_location_post_path(@post)

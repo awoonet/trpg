@@ -5,19 +5,23 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    super
   end
 
   # GET /users/1 or /users/1.json
   def show
+    super
   end
 
   # GET /users/new
   def new
     @user = User.new
+    super
   end
 
   # GET /users/1/edit
   def edit
+    super
   end
 
   # POST /users or /users.json
@@ -73,6 +77,7 @@ class UsersController < ApplicationController
       @model = User
       @index_path = users_path
       @new_path = new_user_path
+      @view = @model.name.pluralize.downcase
       if @user
         @record = @user
         @edit_path = edit_user_path(@user)

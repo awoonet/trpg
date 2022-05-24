@@ -1,7 +1,7 @@
-= render 'record'
+= render "#{@view}/record"
 
 div
   = link_to "Edit this #{@model.name}", @edit_path
   = link_to "Back to #{@model.name.pluralize}", @index_path
 
-  = button_to "Destroy this #{@model.name}", @record, method: :delete
+  = button_to "Destroy this #{@model.name}", @model, method: :delete

@@ -5,19 +5,23 @@ class LocationsController < ApplicationController
   # GET /locations or /locations.json
   def index
     @locations = Location.all
+    super
   end
 
   # GET /locations/1 or /locations/1.json
   def show
+    super
   end
 
   # GET /locations/new
   def new
     @location = Location.new
+    super
   end
 
   # GET /locations/1/edit
   def edit
+    super
   end
 
   # POST /locations or /locations.json
@@ -73,6 +77,7 @@ class LocationsController < ApplicationController
       @model = Location
       @index_path = game_locations_path
       @new_path = new_game_location_path
+      @view = @model.name.pluralize.downcase
       if @location
         @record = @location
         @edit_path = edit_game_location_path(@location)

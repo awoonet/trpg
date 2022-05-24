@@ -5,19 +5,23 @@ class CharactersController < ApplicationController
   # GET /characters or /characters.json
   def index
     @characters = Character.all
+    super
   end
 
   # GET /characters/1 or /characters/1.json
   def show
+    super
   end
 
   # GET /characters/new
   def new
     @character = Character.new
+    super
   end
 
   # GET /characters/1/edit
   def edit
+    super
   end
 
   # POST /characters or /characters.json
@@ -73,6 +77,7 @@ class CharactersController < ApplicationController
       @model = Character
       @index_path = game_characters_path
       @new_path = new_game_character_path
+      @view = @model.name.pluralize.downcase
       if @character
         @record = @character
         @edit_path = edit_game_character_path(@character)

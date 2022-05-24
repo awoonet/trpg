@@ -5,19 +5,23 @@ class GamesController < ApplicationController
   # GET /games or /games.json
   def index
     @games = Game.all
+    super
   end
 
   # GET /games/1 or /games/1.json
   def show
+    super
   end
 
   # GET /games/new
   def new
     @game = Game.new
+    super
   end
 
   # GET /games/1/edit
   def edit
+    super
   end
 
   # POST /games or /games.json
@@ -73,6 +77,7 @@ class GamesController < ApplicationController
       @model = Game
       @index_path = games_path
       @new_path = new_game_path
+      @view = @model.name.pluralize.downcase
       if @game
         @record = @game
         @edit_path = edit_game_path(@game)
