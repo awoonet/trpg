@@ -1,7 +1,0 @@
-= form_with model: @model, url: @index_path do |form|
-  div
-    = form.label :name, class: "form-label"
-    = form.text_field :name, class: "form-control"
-
-  div
-    = form.submit "Add #{@model.name.humanize}", class: "btn btn-primary"

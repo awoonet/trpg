@@ -1,7 +1,1 @@
-.row.align-items-start
-  .col
-    h1 = title @model.name.humanize.pluralize
-  .col.text-end
-    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary"
-
-= render "#{@view}/collection"
+= render "models/#{@view}/collection"

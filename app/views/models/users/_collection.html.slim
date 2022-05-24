@@ -1,0 +1,13 @@
+div id="#{@model.name}"
+  table.table
+    thead
+      tr 
+        th scope='col' #
+        th scope='col' User 
+        th scope='col' Email
+    tbody
+      - @model.all.each do |record|
+        tr scope='row'
+          td = record.id
+          td = link_to record.name, record
+          td = record.email

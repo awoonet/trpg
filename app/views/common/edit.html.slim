@@ -1,9 +1,11 @@
-h1 = title "Editing #{@model.name}"
+.row.align-items-start
+  .col
+    h1 = title "Edit #{@model.name}"
+  .col.text-end.d-flex.flex-row-reverse
+    = link_to "Back to #{@model.name.pluralize}", @index_path, class: 'btn btn-primary'
+    = link_to "Delete #{@model.name}", @record, method: :delete, class: 'btn btn-danger'
 
-= render "#{@view}/form"
-
-br
-
-div
-  = link_to "Show this #{@model.name}", @record
-  = link_to "Back to #{@model.name.pluralize}", @index_path
+= form_with model: @model, url: @index_path do |form|
+  = render "models/#{@view}/form", form: form
+  div
+    = form.submit "Add #{@model.name.humanize}", class: "btn btn-primary"

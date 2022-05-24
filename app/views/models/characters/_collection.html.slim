@@ -1,0 +1,11 @@
+.row.align-items-start
+  .col
+    h1 = title "#{@model.name} #{@record.name}"
+  .col.text-end.d-flex.flex-row-reverse
+    = link_to "Back to Game", @edit_path, class: 'btn btn-primary mx-2'
+    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary"
+
+div id="#{@model.name}"
+  - @model.all.each do |record|
+    p
+      = link_to record.name, record

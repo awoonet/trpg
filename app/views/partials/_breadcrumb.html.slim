@@ -1,0 +1,10 @@
+- if defined? @breadcrumb
+  nav aria-label="breadcrumb"
+    ol.breadcrumb
+      - @breadcrumb.each do |word, link|
+        - unless link == 'active'
+          li.breadcrumb-item aria-current="page" 
+            = link_to word, link
+        - else
+          li.breadcrumb-item.active aria-current="page" 
+            = word

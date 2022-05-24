@@ -1,8 +1,11 @@
-h1 = title "New #{@model.name}" 
+.row.align-items-start
+  .col
+    h1 = title "New #{@model.name}" 
+  .col.text-end
+    = link_to "Back to #{@model.name.pluralize}", @index_path, class: 'btn btn-primary'
 
-= render "#{@view}/form"
-
-br
-
-div 
-  = link_to "Back to #{@model.name.pluralize}", @index_path
+= form_with url: @index_path do |form|
+  = fields_for @model.name.downcase.to_sym do |form|
+    = render "models/#{@view}/form", form: form
+  div
+    = form.submit "Add #{@model.name.humanize}", class: "btn btn-primary"

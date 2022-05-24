@@ -1,0 +1,16 @@
+div id="#{dom_id(@user)}"
+  dl.row
+    dt.col-sm-3 Name:
+    dd.col-sm-9 = @user.name 
+
+    dt.col-sm-3 Email:
+    dd.col-sm-9 = @user.email
+
+  - chars = Character.where(user_id: @user.id)
+  - unless chars == []
+    | Characters: 
+    ul
+      - chars.each do |char|
+        = render 'models/charachters/card', char: char
+  - else 
+    | You have no characters yet! Create new in one of games
