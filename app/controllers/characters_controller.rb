@@ -1,74 +1,44 @@
 class CharactersController < ApplicationController
-  before_action :set_character, only: %i[ show edit update destroy ]
   before_action :set_vars
 
-  # GET /characters or /characters.json
+  # GET /model
   def index
-    @characters = @model.all
-    super
-  end
-
-  # GET /characters/1 or /characters/1.json
-  def show
-    super
-  end
-
-  # GET /characters/new
-  def new
-    @character = @model.new
-    super
-  end
-
-  # GET /characters/1/edit
-  def edit
-    super
-  end
-
-  # POST /characters or /characters.json
-  def create
-    @character = @model.new(character_params)
-
-    if @character.save
-      redirect_to game_characters_path(@character), notice: "#{@model.name.pluralize} was successfully created."
-    else
-      redirect_to new_game_character_path, alert: "Error! #{@model.name.pluralize} was not created."
-    end
-  end
-
-  # PATCH/PUT /characters/1 or /characters/1.json
-  def update
-    if @character.update(character_params)
-      redirect_to game_characters_path(@character), notice: "#{@model.name.pluralize} was successfully updated."
-    else
-      redirect_to edit_game_character_path(@character), alert: "Error! #{@model.name.pluralize} was not saved."
-    end
-  end
-
-  # DELETE /characters/1 or /characters/1.json
-  def destroy
-    @character.destroy
-    redirect_to @index_path, notice: "Character was successfully destroyed."
+    @records = @model.where(game_id: params[:game_id]).all
+    @breadcrumb = { "#{home_button}": 'active' }
+    render "models/#{@view}/index"
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_character
-      @character = @model.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
-    def character_params
-      params.require(:character).permit(:name)
+    def model_params
+      params.require(:character).permit(
+        :name, :game_id,
+        :age, :race, :profession, 
+        :health, :mana, :money, 
+        :strength, :stamina, :accuracy, :agility, 
+        :savvy, :knowledge, :will, :charm)
     end
 
     def set_vars
       @model = Character
       @index_path = game_characters_path
+      @index_url = game_characters_url
       @new_path = new_game_character_path
       @view = @model.name.pluralize.downcase
-      if @character
-        @record = @character
-        @edit_path = edit_game_character_path(@character)
+      if params[:id]
+        @record = @model.find(params[:id])
+        @show_path = game_character_path(@record)
+        @edit_path = edit_game_character_path(@record)
       end
+      binding.pry
+      if params[:game_id]
+        @game = Game.find_by(id: params[:game_id])
+        @items = Item.where(game_id: params[:game_id])
+        @skills = Skill.where(game_id: params[:game_id])
+      end
+    end
+
+    def show_path
+      game_character_path(@record, game_id: params[:game_id])
     end
 end

@@ -1,26 +1,62 @@
 class ApplicationController < ActionController::Base
-  # GET /model or /model.json
+
+  # GET /model
   def index
+    @records = @model.all
     @breadcrumb = { "#{home_button}": 'active' }
-    render 'common/index'
+    render "models/#{@view}/index"
   end
 
-  # GET /model/1 or /model/1.json
+  # GET /model/1
   def show
-    @breadcrumb = { "#{home_button}": @index_path, "#{@record.name}": 'active' }
-    render 'common/show'
+    @breadcrumb = { 
+      "#{home_button}": @index_path, 
+      "#{@record.name}": 'active' }
+    render "models/#{@view}/show"
   end
 
   # GET /model/new
   def new
-    @breadcrumb = { "#{home_button}": @index_path, "New #{@model.name.humanize}": 'active' }
+    @record = @model.new
+    @breadcrumb = { 
+      "#{home_button}": @index_path, 
+      "New #{@model.name.humanize}": 'active' }
     render 'common/new'
   end
 
   # GET /model/1/edit
   def edit
-    @breadcrumb = { "#{home_button}": @index_path, "Edit #{@record.name}": 'active' }
+    @breadcrumb = { 
+      "#{home_button}": @index_path, 
+      "#{@record.name}": show_path,
+      "Edit": 'active' }
     render 'common/edit'
+  end
+
+  # POST /model
+  def create
+    @record = @model.new(model_params)
+    if @record.save
+      redirect_to show_path, notice: "#{@model.name} was successfully created."
+    else
+      redirect_to @new_path, alert: "Error! #{@model.name} was not created."
+    end
+  end
+
+  # PATCH/PUT /model/1
+  def update
+    if @record.update(model_params)
+      redirect_to @show_path, notice: "#{@model.name} was successfully updated."
+    else
+      redirect_to @edit_path, alert: "Error! #{@model.name} was not updated."
+    end
+  end
+
+  # DELETE /model/1
+  def destroy
+    @record.destroy
+    binding.pry
+    redirect_to @index_path, notice: "#{@model.name} was successfully destroyed."
   end
 
   private

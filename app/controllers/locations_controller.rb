@@ -1,68 +1,47 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: %i[ show edit update destroy ]
   before_action :set_vars
 
-  # GET /locations/1 or /locations/1.json
+  # GET /model
+  def index
+    @records = @model.where(game_id: params[:game_id]).all
+    @breadcrumb = { "#{home_button}": 'active' }
+    render "models/#{@view}/index"
+  end
+
+  # GET /model/1
   def show
-    super
-  end
-
-  # GET /locations/new
-  def new
-    @location = Location.new
-    super
-  end
-
-  # GET /locations/1/edit
-  def edit
-    super
-  end
-
-  # POST /locations
-  def create
-    @location = Location.new(location_params)
-
-    if @location.save
-      redirect_to location_url(@location), notice: "Location was successfully created."
-    else
-      render 'common/new', status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /locations/1
-  def update
-    if @location.update(location_params)
-      redirect_to location_url(@location), notice: "Location was successfully updated."
-    else
-      render 'common/edit', status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /locations/1
-  def destroy
-    @location.destroy
-      redirect_to locations_url, notice: "Location was successfully destroyed."
+    @breadcrumb = { 
+      "Games": games_path, 
+      "#{@game.name}": game_path(@game),
+      "#{@record.name}": 'active' }
+    render "models/#{@view}/show"
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_location
-      @location = Location.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
-    def location_params
-      params.require(:location).permit(:name)
+    def model_params
+      params.require(:location).permit(:name, :game_id)
     end
 
     def set_vars
       @model = Location
       @index_path = game_locations_path
+      @index_url = game_locations_url
       @new_path = new_game_location_path
       @view = @model.name.pluralize.downcase
-      if @location
-        @record = @location
-        @edit_path = edit_game_location_path(@location)
+      if params[:id]
+        @record = @model.find(params[:id])
+        @show_path = game_location_path(@record)
+        @edit_path = edit_game_location_path(@record)
       end
+      if params[:game_id]
+        @game = Game.find_by(id: params[:game_id])
+        @items = Item.where(game_id: params[:game_id])
+        @skills = Skill.where(game_id: params[:game_id])
+      end
+    end
+
+    def show_path
+      game_location_path(@record, game_id: params[:game_id])
     end
 end
