@@ -1,4 +1,4 @@
-.row.align-items-start
+.row.align-items-start.mb-3
   .col
     h1 = title @model.name.humanize.pluralize
   .col.text-end
@@ -6,5 +6,4 @@
 
 div id="#{@model.name}"
   - @model.all.each do |record|
-    p
-      = link_to record.name, record
+    = render "common/card", record: record, path: game_path(record.id)

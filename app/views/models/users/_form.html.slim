@@ -1,16 +1,17 @@
-div
-  = form.label :name, class: "form-label"
-  = form.text_field :name, class: "form-control"
+.row
+  .col
+    = f.label :name, class: "form-label"
+    = f.text_field :name, class: "form-control mb-2"
 
-div
-  = form.label :email, class: "form-label"
-  = form.text_field :email, class: "form-control"
+    = f.label :password, class: "form-label"
+    = f.password_field :password, class: "form-control mb-2"
 
-div
-  = form.label :password, class: "form-label"
-  = form.password_field :password, class: "form-control"
+    = f.label :avatar, class: "form-label"
+    = f.file_field :avatar, class: "form-control mb-2"
 
-div
-  = form.label :password_confirmation, class: "form-label"
-  = form.password_field :password_confirmation, class: "form-control"
+  .col
+    = f.label :email, class: "form-label"
+    = f.text_field :email, class: "form-control mb-2"
 
+    = f.label :password_confirmation, class: "form-label"
+    = f.password_field :password_confirmation, class: "form-control mb-2"

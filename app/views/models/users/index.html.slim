@@ -1,3 +1,9 @@
+.row.align-items-start
+  .col
+    h1 = title @model.name.pluralize
+  .col.text-end.d-flex.flex-row-reverse
+    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary"
+
 div id="#{@model.name}"
   table.table
     thead

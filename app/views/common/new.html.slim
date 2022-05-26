@@ -1,11 +1,12 @@
-.row.align-items-start
+.row.align-items-start.mb-4
   .col
     h1 = title "New #{@model.name}" 
   .col.text-end
     = link_to "Back to #{@model.name.pluralize}", @index_path, class: 'btn btn-primary'
 
-= form_with url: @index_path do |form|
-  = fields_for @model.name.downcase.to_sym do |form|
-    = render "models/#{@view}/form", form: form
-  div
-    = form.submit "Add #{@model.name.humanize}", class: "btn btn-primary"
+= form_with method: :post, model: @model, url: @index_path do |f|  
+  = f.hidden_field :game_id, value: @game.id if @game
+
+  = render "models/#{@view}/form", f: f
+
+  = f.submit "Add #{@model.name.humanize}", class: "btn btn-primary mt-3"

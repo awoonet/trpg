@@ -1,7 +1,60 @@
-= form_with model: @record, url: @index_path do |form|
-  div
-    = form.label :name, class: "form-label"
-    = form.text_field :name, class: "form-control"
+.row
+  .col.m-3
+    - %i[name age race profession health mana money].each do |property|
+      .row.mb-2
+        = f.label property, class: "form-label"
+        = f.text_field property, class: "form-control"
+    .row.mb-2
+      = f.label :avatar, class: "form-label"
+      = f.file_field :avatar, class: "form-control"
+  .col.m-3
+    - characteristics = %i[strength stamina accuracy agility savvy knowledge will charm]
+    - characteristics.each do |characteristic|
+      .row.mb-2.align-items-center
+        .row
+          = f.label characteristic, class: "col-3 form-label m-0"
+          span.col-8
+          span.col-1.m-0 id="character_#{characteristic.to_s}_number"
+        = f.range_field characteristic, class: "form-control", min: 0, max: 20, value: 0
+    div
+      = f.label :items, class: "col-2 form-label"
+      = f.select :items, @items, class: "w-75 form-control", multiple: true
 
-  div
-    = form.submit "Add #{@model.name.humanize}", class: "btn btn-primary"
+      = f.label :skills, class: "col-2 form-label"
+      = f.select :skills, @skills, class: "w-75 form-control", multiple: true
+    
+.row
+  .col
+    - %i[description biography].each do |property|
+      = f.label property, class: "form-label"
+      = f.text_area property, class: "form-control mb-2"
+
+javascript: 
+  let characteristics = "#{characteristics}".replaceAll(':', '"').replaceAll(',', '",').replace(']', '"]');
+  characteristics = JSON.parse(characteristics);
+
+  function change_side_number(characteristic) {
+    if (characteristics.includes(characteristic)) {
+      let value = document.getElementById(`character_${characteristic}`).value
+      document.getElementById(`character_${characteristic}_number`).innerHTML = value
+  }};
+
+  document.addEventListener("DOMContentLoaded", function(){
+    characteristics.forEach(e => {
+      change_side_number(e)
+
+      let range = document.getElementById(`character_${e}`)
+      range.addEventListener('change', q => {
+        change_side_number(e)
+      })
+    });
+
+    ['#character_skills', '#character_items'].forEach(e => {
+      new SlimSelect({ 
+        select: e,
+        data: [{
+          'placeholder': true, 
+          'text': 'Select Skills'
+        }]});
+    })
+  });

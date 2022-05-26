@@ -1,11 +1,13 @@
-.row.align-items-start
+.row.align-items-start.mb-4
   .col
     h1 = title "Edit #{@model.name}"
   .col.text-end.d-flex.flex-row-reverse
     = link_to "Back to #{@model.name.pluralize}", @index_path, class: 'btn btn-primary'
     = link_to "Delete #{@model.name}", @record, method: :delete, class: 'btn btn-danger'
 
-= form_with model: @model, url: @index_path do |form|
-  = render "models/#{@view}/form", form: form
-  div
-    = form.submit "Add #{@model.name.humanize}", class: "btn btn-primary"
+= form_with method: :put, model: @record, url: @show_path do |f|
+  = f.hidden_field :game_id, value: @game.id if @game
+
+  = render "models/#{@view}/form", f: f
+
+  = f.submit "Edit #{@model.name.humanize}", class: "btn btn-primary mt-3"
