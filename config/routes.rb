@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   root "games#index"
 
   resources :games do
-    resources :locations do
-      resources :posts
-    end
+    resources :locations, except: %i[index]
     resources :characters
   end
   resources :users

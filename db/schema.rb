@@ -16,30 +16,64 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
   enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.string "avatar"
+    t.integer "age"
+    t.string "race"
+    t.string "profession"
+    t.integer "health"
+    t.integer "mana"
+    t.integer "strength"
+    t.integer "stamina"
+    t.integer "accuracy"
+    t.integer "agility"
+    t.integer "savvy"
+    t.integer "knowledge"
+    t.integer "will"
+    t.integer "charm"
+    t.integer "money"
+    t.bigint "inventory", array: true
+    t.bigint "skills", array: true
+    t.text "description"
+    t.text "biography"
     t.bigint "game_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_characters_on_game_id"
+    t.index ["name"], name: "index_characters_on_name", unique: true
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.string "avatar"
+    t.text "description"
+    t.boolean "nsfw", default: false
+    t.boolean "whitelisted", default: false
+    t.bigint "admins", array: true
+    t.bigint "whitelist", array: true
+    t.bigint "blacklist", array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_games_on_name", unique: true
   end
 
-  create_table "games_admins", force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type"
+    t.text "description"
     t.bigint "game_id"
-    t.bigint "admin_id"
-    t.index ["admin_id"], name: "index_games_admins_on_admin_id"
-    t.index ["game_id"], name: "index_games_admins_on_game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_items_on_game_id"
+    t.index ["name"], name: "index_items_on_name", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.text "description"
+    t.string "avatar"
     t.bigint "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -47,7 +81,7 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.text "content"
+    t.text "content", null: false
     t.bigint "location_id"
     t.bigint "character_id"
     t.datetime "created_at", precision: 6, null: false
@@ -56,9 +90,21 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
     t.index ["location_id"], name: "index_posts_on_location_id"
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type"
+    t.text "description"
+    t.bigint "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_skills_on_game_id"
+    t.index ["name"], name: "index_skills_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
+    t.string "avatar"
     t.boolean "is_admin", default: false
     t.string "crypted_password"
     t.string "salt"
@@ -68,6 +114,4 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
-  add_foreign_key "games_admins", "games"
-  add_foreign_key "games_admins", "users", column: "admin_id"
 end
