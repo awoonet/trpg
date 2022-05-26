@@ -1,0 +1,24 @@
+#!/bin/bash
+
+case $1 in
+  'db:recreate')
+    echo 'RUN rails db:drop'
+    rails db:drop
+    echo 'RUN rails db:create'
+    rails db:create
+    echo 'RUN rails db:migrate'
+    rails db:migrate;;
+  'dev')
+    echo 'RUN bin/dev'
+    bin/dev;;
+  's'|'server') 
+    echo 'RUN rails s'
+    rails s;;
+  'help')
+    echo "
+    db:recreate - db drop, create and migrate
+    dev       - bin/dev
+    s, server - rails s";;
+  *)
+    echo "Unknown command, write help";;
+esac
