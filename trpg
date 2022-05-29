@@ -11,6 +11,11 @@ case $1 in
   'dev')
     echo 'RUN bin/dev'
     bin/dev;;
+  'recompile')
+    echo 'RUN rm -r public/assets'
+    rm -r public/assets
+    echo 'RUN rails assets:precompile'
+    rails assets:precompile;;
   's'|'server') 
     echo 'RUN rails s'
     rails s;;
