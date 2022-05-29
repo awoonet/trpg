@@ -1,7 +1,9 @@
 class Location < ApplicationRecord
+  belongs_to :game
+  
+  has_many :posts
+
   validates :name, presence: true
 
-  belongs_to :game
-
-  has_many :posts
+  mount_uploader :avatar, AvatarUploader
 end
