@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def model_params
-      params.require(:game).permit(:name, :avatar)
+      params.require(:game).permit(:name, :description, :avatar)
     end
 
     def set_vars

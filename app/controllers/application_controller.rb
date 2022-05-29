@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_common_vars
 
   # GET /model
   def index
@@ -63,5 +64,13 @@ class ApplicationController < ActionController::Base
 
   def home_button
     @model.name.humanize.pluralize
+  end
+
+  def set_common_vars
+    if params[:game_id]
+      @game = Game.find_by(id: params[:game_id])
+      @items = Item.for_game(params[:game_id])
+      @skills = Skill.for_game(params[:game_id])
+    end
   end
 end

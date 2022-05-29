@@ -31,11 +31,6 @@ class CharactersController < ApplicationController
         @show_path = game_character_path(@record)
         @edit_path = edit_game_character_path(@record)
       end
-      if params[:game_id]
-        @game = Game.find_by(id: params[:game_id])
-        @items = Item.for_game(params[:game_id])
-        @skills = Skill.for_game(params[:game_id])
-      end
     end
 
     def show_path
