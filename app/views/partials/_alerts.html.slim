@@ -1,6 +1,5 @@
-- if notice
-  .alert.alert-success role="alert"
-    = notice
+= tag.div alert, class: "alert alert-danger", role: "alert" if alert
+= tag.div notice, class: "alert alert-success", role: "alert" if notice
 
 - if @record && @record.errors.any?
   .alert.alert-danger role="alert"
