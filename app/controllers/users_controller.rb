@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def model_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(
+        :name, :email, :avatar,
+        :password, :password_confirmation)
     end
 
     def set_vars
@@ -20,8 +22,8 @@ class UsersController < ApplicationController
       end
       if params[:game_id]
         @game = Game.find_by(id: params[:game_id])
-        @items = Item.where(game_id: params[:game_id])
-        @skills = Skill.where(game_id: params[:game_id])
+        @items = Item.for_game(params[:game_id])
+        @skills = Skill.for_game(params[:game_id])
       end
     end
 

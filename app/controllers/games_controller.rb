@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def model_params
-      params.require(:game).permit(:name)
+      params.require(:game).permit(:name, :avatar)
     end
 
     def set_vars
@@ -17,8 +17,8 @@ class GamesController < ApplicationController
         @record = @model.find(params[:id])
         @show_path = game_path(@record)
         @edit_path = edit_game_path(@record)
-        @items = Item.where(game_id: params[:id])
-        @skills = Skill.where(game_id: params[:id])
+        @items = Item.for_game(params[:id])
+        @skills = Skill.for_game(params[:id])
       end
     end
 

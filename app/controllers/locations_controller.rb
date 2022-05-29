@@ -20,7 +20,7 @@ class LocationsController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def model_params
-      params.require(:location).permit(:name, :game_id)
+      params.require(:location).permit(:name, :game_id, :avatar)
     end
 
     def set_vars
@@ -36,8 +36,8 @@ class LocationsController < ApplicationController
       end
       if params[:game_id]
         @game = Game.find_by(id: params[:game_id])
-        @items = Item.where(game_id: params[:game_id])
-        @skills = Skill.where(game_id: params[:game_id])
+        @items = Item.for_game(params[:game_id])
+        @skills = Skill.for_game(params[:game_id])
       end
     end
 
