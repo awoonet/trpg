@@ -1,0 +1,16 @@
+
+- unless game.locations == []
+  table.table 
+    thead 
+      tr 
+        th Name 
+        th Characters
+        th Posts
+    tbody 
+      - game.locations.each do |l|
+        tr 
+          td = link_to l.name, game_location_path(l, game_id: game.id)
+          td 
+          td = l.posts.count
+- else 
+  | There are no locations in this game.

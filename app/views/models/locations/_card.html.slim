@@ -1,0 +1,26 @@
+.col-3.mb-3
+  - if record.avatar.thumb.file
+    .avatar.border
+      = image_tag\
+        record.avatar.thumb.file.file.gsub(/(.+)(public)/, ''), 
+        class: "card-img-top avatar__img", 
+        alt: "#{record.name}'s avatar"
+
+      .avatar__overlay.d-flex.flex-column.align-items-center.justify-content-between
+        h5.mt-3
+          = record.name
+        p 
+          = record.description
+
+        div 
+        = "NSFW" if record.nsfw
+        = link_to "Go to game", path, class: "btn btn-primary mb-3"
+
+  - else 
+    .border.d-flex.flex-column.align-items-center.justify-content-between.h-100
+      h5.mt-3
+        = record.name
+      p 
+        = record.description
+
+      = link_to "Go to game", path, class: "btn btn-primary mb-3"

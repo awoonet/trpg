@@ -1,3 +1,9 @@
+.row.align-items-start.mb-3
+  .col
+    h1 = title @record.name.humanize
+  .col.text-end
+    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
+
 div id="#{dom_id(@record)}"
   dl
     dt Name:

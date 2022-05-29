@@ -1,3 +1,5 @@
+= f.hidden_field :user_id, value: current_user.id if current_user
+
 .row
   .col.m-3
     - %i[name age race profession health mana money].each do |property|

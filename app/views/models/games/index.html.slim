@@ -2,8 +2,16 @@
   .col
     h1 = title @model.name.humanize.pluralize
   .col.text-end
-    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary"
+    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
 
-div id="#{@model.name}"
-  - @model.all.each do |record|
-    = render "common/card", record: record, path: game_path(record.id)
+.row id="#{@model.name}"
+    - @model.all.each do |record|
+      - if no_nsfw_without_login record
+        .col-3.mb-3
+          - if record.avatar.thumb.file
+            .game__avatar.border.rounded
+              = image_tag record.avatar.thumb.file.file.gsub(/(.+)(public)/, ''), 
+                class: "card-img-top game__avatar__img", alt: "#{record.name}'s avatar"
+              = render "models/games/card", record: record, path: game_path(record.id)
+          - else 
+            = render "models/games/card", record: record, path: game_path(record.id)
