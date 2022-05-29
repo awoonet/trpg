@@ -42,8 +42,8 @@ class CreateDb < ActiveRecord::Migration[7.0]
       t.integer :stamina
       t.integer :accuracy
       t.integer :agility
-      t.integer :savvy
-      t.integer :knowledge
+      t.integer :intelligence
+      t.integer :wisdom
       t.integer :will
       t.integer :charm
 

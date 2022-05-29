@@ -8,7 +8,7 @@
       = f.label :avatar, class: "form-label"
       = f.file_field :avatar, class: "form-control"
   .col.m-3
-    - characteristics = %i[strength stamina accuracy agility savvy knowledge will charm]
+    - characteristics = %i[strength stamina accuracy agility intelligence wisdom will charm]
     - characteristics.each do |characteristic|
       .row.mb-2.align-items-center
         .row
@@ -33,7 +33,7 @@ javascript:
   let characteristics = "#{characteristics}".replaceAll(':', '"').replaceAll(',', '",').replace(']', '"]');
   characteristics = JSON.parse(characteristics);
 
-  function change_side_number(characteristic) {
+  function changeSideNumber(characteristic) {
     if (characteristics.includes(characteristic)) {
       let value = document.getElementById(`character_${characteristic}`).value
       document.getElementById(`character_${characteristic}_number`).innerHTML = value
@@ -41,20 +41,20 @@ javascript:
 
   document.addEventListener("DOMContentLoaded", function(){
     characteristics.forEach(e => {
-      change_side_number(e)
+      changeSideNumber(e)
 
       let range = document.getElementById(`character_${e}`)
       range.addEventListener('change', q => {
-        change_side_number(e)
+        changeSideNumber(e)
       })
     });
 
-    ['#character_skills', '#character_items'].forEach(e => {
+    ['skills', 'items'].forEach(e => {
       new SlimSelect({ 
-        select: e,
+        select: `#character_${e}`,
         data: [{
           'placeholder': true, 
-          'text': 'Select Skills'
+          'text': 'Select ${e}'
         }]});
     })
   });
