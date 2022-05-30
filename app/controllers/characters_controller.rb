@@ -12,12 +12,11 @@ class CharactersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def model_params
       params.require(:character).permit(
-        :name, :game_id, :avatar,
-        :age, :race, :profession, 
-        :health, :mana, :money, 
+        :name, :game_id, :user_id, :avatar, :age, 
+        :race, :profession, :health, :mana, :money, 
         :strength, :stamina, :accuracy, :agility, 
         :intelligence, :wisdom, :will, :charm,         
-        :description, :biography)
+        :description, :biography, items: [], skills: [])
     end
 
     def set_vars
