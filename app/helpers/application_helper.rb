@@ -12,13 +12,7 @@ module ApplicationHelper
     ) if record.avatar.file
   end
 
-  def no_nsfw_without_login game
-    if current_user && game.nsfw
-      true
-    elsif !game.nsfw
-      true
-    else
-      false
-    end
+  def admin_access game, user
+    user && (game.admins.include?(user.id) || user.is_admin)
   end
 end
