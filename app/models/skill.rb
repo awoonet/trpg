@@ -3,5 +3,7 @@ class Skill < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :for_game, ->(id) { where(game_id: id) }
+  scope :for_game, ->(id) do 
+    where(game_id: id)
+  end
 end

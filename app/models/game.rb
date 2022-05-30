@@ -13,5 +13,4 @@ class Game < ApplicationRecord
       where(whitelisted: false).or(where(":id = ANY(whitelist)", whitelisted: true, id: user.id))
     end
   end
-
 end
