@@ -4,9 +4,21 @@
       = f.label :name, class: "form-label"
       = f.text_field :name, class: "form-control"
 
-    .mb-2
+    .mb-3
       = f.label :avatar, class: "form-label"
       = f.file_field :avatar, class: "form-control"
+
+    .row.mb-2 
+      .col.d-flex.justify-content-between.align-items-center
+        span NSFW
+        = f.label :nsfw, class: "switch" do
+          = f.check_box :nsfw
+          span.slider.round
+      .col.d-flex.justify-content-between.align-items-center
+        span Whitelisted
+        = f.label :whitelisted, class: "switch" do
+          = f.check_box :whitelisted
+          span.slider.round
     div
       = f.label :description, class: "form-label"
       = f.text_area :description, class: "form-control"
