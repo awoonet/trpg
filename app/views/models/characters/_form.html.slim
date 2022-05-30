@@ -17,7 +17,7 @@
           = f.label characteristic, class: "col-3 form-label m-0"
           span.col-8
           span.col-1.m-0 id="character_#{characteristic.to_s}_number"
-        = f.range_field characteristic, class: "form-control", min: 0, max: 20, value: 0
+        = f.range_field characteristic, class: "form-control-range", min: 0, max: 20, value: 0
     div
       = f.label :items, class: "col-2 form-label"
       = f.select :items, @items, class: "w-75 form-control", multiple: true
@@ -56,7 +56,7 @@ javascript:
         select: `#character_${e}`,
         data: [{
           'placeholder': true, 
-          'text': 'Select ${e}'
+          'text': `Select ${e}`
         }]});
     })
   });
