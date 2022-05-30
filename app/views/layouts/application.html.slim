@@ -4,16 +4,10 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = display_meta_tags site: 'TRPG', reverse: true
-
-    - ["bootstrap.min", "slimselect.min", "application"].each do |url|
-      = stylesheet_link_tag url, "data-turbo-track": "reload"
-
-    - ["bootstrap.bundle.min.js", "slimselect.min.js", "application"].each do |url|
-      = javascript_include_tag url, "data-turbo-track": "reload", defer: true
- 
-  body 
+    = render 'partials/assets'
+  body
     .container
       = render 'partials/navbar'
       = render 'partials/alerts'
-      = render 'partials/breadcrumb' 
+      = render 'partials/breadcrumb'
       = yield

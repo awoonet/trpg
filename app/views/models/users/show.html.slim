@@ -1,3 +1,9 @@
+.row.align-items-start
+  .col
+    h1 = title "#{@model.name} #{@record.name}"
+  .col.text-end.d-flex.flex-row-reverse
+    = link_to "Edit #{@model.name}", @edit_path, class: "btn btn-primary"
+
 div id="#{dom_id(@record)}"
   dl.row
     dt.col-sm-3 Name:

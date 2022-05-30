@@ -1,0 +1,6 @@
+- theme = current_user && current_user.theme ? current_user.theme : "default"
+- ["bootstrap-#{theme}.min", "slimselect.min", "application"].each do |url|
+  = stylesheet_link_tag url, "data-turbo-track": "reload"
+
+- ["bootstrap.bundle.min.js", "slimselect.min.js", "application"].each do |url|
+  = javascript_include_tag url, "data-turbo-track": "reload", defer: true

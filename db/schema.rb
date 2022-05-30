@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
     t.string "name", null: false
     t.string "email", null: false
     t.string "avatar"
+    t.string "theme", default: "default"
     t.boolean "is_admin", default: false
     t.string "crypted_password"
     t.string "salt"

@@ -4,6 +4,7 @@ class CreateDb < ActiveRecord::Migration[7.0]
       t.string :name, null: false, index: { unique: true }
       t.string :email, null: false, index: { unique: true }
       t.string :avatar
+      t.string :theme, default: "default"
       t.boolean :is_admin, default: false
       
       t.string :crypted_password
