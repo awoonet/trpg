@@ -8,7 +8,7 @@ class GamesController < ApplicationController
     end
 
     def set_vars
-      @model = Game
+      @model = Game.signed_in?(current_user)
       @index_path = games_path
       @index_url = games_url
       @new_path = new_game_path
