@@ -1,6 +1,19 @@
 #!/bin/bash
 
 case $1 in
+  'c'|'console')
+    echo 'RUN rails c'
+    rails c;;
+  'g'|'generate')
+    echo 'RUN rails g $2 $3 $4 $5 $6 $7 $8 $9'
+    rails g $2 $3 $4 $5 $6 $7 $8 $9;;
+  's'|'server') 
+    echo 'RUN rails s'
+    rails s;;
+
+  'dev')
+    echo 'RUN bin/dev'
+    bin/dev;;
   'db:recreate')
     echo 'RUN rails db:drop'
     rails db:drop
@@ -8,22 +21,27 @@ case $1 in
     rails db:create
     echo 'RUN rails db:migrate'
     rails db:migrate;;
-  'dev')
-    echo 'RUN bin/dev'
-    bin/dev;;
   'recompile')
     echo 'RUN rm -r public/assets'
     rm -r public/assets
     echo 'RUN rails assets:precompile'
     rails assets:precompile;;
-  's'|'server') 
-    echo 'RUN rails s'
-    rails s;;
+
+  'chown')
+    echo 'RUN sudo chown $USER $2 $3 $4 $5 $6 $7 $8 $9'
+    sudo chown $USER $2 $3 $4 $5 $6 $7 $8 $9;;
+
   'help')
     echo "
+    c, console  - 'rails c'
+    g, generate - 'rails g ARGUMENTS'
+    s, server   - 'rails s'
+    dev         - 'bin/dev'
     db:recreate - db drop, create and migrate
-    dev       - bin/dev
-    s, server - rails s";;
+    recompile   - deletes assets and runs 'rails assets:precompile'
+    chown       - 'sudo chown $USER path/to/file'
+    help        - shows this message
+    ";;
   *)
     echo "Unknown command, write help";;
 esac
