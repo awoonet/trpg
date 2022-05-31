@@ -1,0 +1,18 @@
+.m-2
+  strong.mb-1 
+    = post.character.name
+
+  .mb-1 
+    = render "partials/thumb", record: post.character
+
+  .mb-1
+    i.fas.fa-heart.text-danger
+    = " #{post.character.health}"
+
+  .mb-1 
+    i.fa-solid.fa-wand-sparkles.text-primary
+    = " #{post.character.mana}"
+
+  .mb-1 
+    i.fa-solid.fa-coins.text-warning
+    = " #{post.character.money}"
