@@ -68,8 +68,7 @@ class ApplicationController < ActionController::Base
   def set_common_vars
     if params[:game_id]
       @game = Game.signed_in?(current_user).find_by(id: params[:game_id])
-      @items = Item.for_game(params[:game_id])
-      @skills = Skill.for_game(params[:game_id])
+      @game_path = game_path(@game.id)
     end
   end
 
