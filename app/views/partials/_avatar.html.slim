@@ -1,0 +1,4 @@
+- if record.avatar.file
+  = image_tag record.avatar.file.file.gsub(/(.+)(public)/, ''),
+    class: "img-fluid",
+    alt: "#{record.name}'s avatar"

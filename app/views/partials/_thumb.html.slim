@@ -1,0 +1,4 @@
+- if record.avatar.thumb.file
+  = image_tag record.avatar.thumb.file.file.gsub(/(.+)(public)/, ''),
+    class: "card__avatar__img",
+    alt: "#{record.name}'s avatar"
