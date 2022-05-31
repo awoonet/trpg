@@ -1,6 +1,12 @@
 class GamesController < ApplicationController
   before_action :set_vars
 
+    # GET /model/1
+    def show
+      @locations = Location.for_game(@record.id)
+      super
+    end
+
   private
 
   # Only allow a list of trusted parameters through.
@@ -21,8 +27,6 @@ class GamesController < ApplicationController
       @record = @model.find(params[:id])
       @show_path = game_path(@record)
       @edit_path = edit_game_path(@record)
-      @items = Item.for_game(params[:id])
-      @skills = Skill.for_game(params[:id])
     end
   end
 
