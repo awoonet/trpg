@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_23_125114) do
+ActiveRecord::Schema.define(version: 2022_05_31_152941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,8 +61,9 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
 
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
-    t.string "type"
+    t.string "kind"
     t.text "description"
+    t.string "type"
     t.bigint "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -74,6 +75,8 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
     t.string "name", null: false
     t.text "description"
     t.string "avatar"
+    t.bigint "parent_location_id"
+    t.bigint "child_locations_ids", array: true
     t.bigint "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -82,6 +85,7 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
 
   create_table "posts", force: :cascade do |t|
     t.text "content", null: false
+    t.bigint "location_to"
     t.bigint "location_id"
     t.bigint "character_id"
     t.datetime "created_at", precision: 6, null: false
@@ -90,22 +94,11 @@ ActiveRecord::Schema.define(version: 2022_05_23_125114) do
     t.index ["location_id"], name: "index_posts_on_location_id"
   end
 
-  create_table "skills", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "type"
-    t.text "description"
-    t.bigint "game_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_skills_on_game_id"
-    t.index ["name"], name: "index_skills_on_name", unique: true
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "avatar"
-    t.string "theme", default: "default"
+    t.string "theme", default: "flatly"
     t.boolean "is_admin", default: false
     t.string "crypted_password"
     t.string "salt"
