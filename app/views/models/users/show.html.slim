@@ -1,22 +1,26 @@
-.row.align-items-start
+.row.align-items-start.mb-3
   .col
     h1 = title "#{@model.name} #{@record.name}"
   .col.text-end.d-flex.flex-row-reverse
     = link_to "Edit #{@model.name}", @edit_path, class: "btn btn-primary"
 
 div id="#{dom_id(@record)}"
-  dl.row
-    dt.col-sm-3 Name:
-    dd.col-sm-9 = @record.name 
+  .row
+    .col-8
+      dl.row 
+        - [\
+            ["Name:", @record.name],
+            ["Email:", @record.email],
+            ["Theme:", @record.theme.titleize],
+          ].each do |title, content|
+          dt.col-sm-2 = title
+          dd.col-sm-10 = content
 
-    dt.col-sm-3 Email:
-    dd.col-sm-9 = @record.email
+    .col-4
+      = render 'partials/avatar', record: @record
 
-  - chars = Character.where(user_id: @record.id)
-  - unless chars == []
+  - unless @chars == []
     | Characters: 
-    ul
-      - chars.each do |char|
-        = render 'common/card', record: char
+    = render 'partals/card_collection', collection: @chars
   - else 
-    | You have no characters yet! Create new in one of games
+    p You have no characters yet! Create new in one of games.
