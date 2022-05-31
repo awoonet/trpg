@@ -1,0 +1,10 @@
+.row
+  .col-6.mt-4.mx-auto
+    = image_tag "error.png", class: "card-img-top"
+    .card-body.text-center
+      h1.title.my-4
+        = title @title
+      h5.subtitle.my-4
+        = @text
+      p.my-3
+        = link_to "Games page", root_path, class: "btn btn-primary"
