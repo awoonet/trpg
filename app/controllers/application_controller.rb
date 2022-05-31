@@ -56,7 +56,6 @@ class ApplicationController < ActionController::Base
   # DELETE /model/1
   def destroy
     @record.destroy
-    binding.pry
     redirect_to @index_path, notice: "#{@model.name} was successfully destroyed."
   end
 
@@ -72,5 +71,9 @@ class ApplicationController < ActionController::Base
       @items = Item.for_game(params[:game_id])
       @skills = Skill.for_game(params[:game_id])
     end
+  end
+
+  def user_is_admin
+    current_user && current_user.is_admin
   end
 end
