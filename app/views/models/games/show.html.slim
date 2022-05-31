@@ -1,4 +1,4 @@
-.row.align-items-start
+.row.align-items-start.mb-3
   .col
     h1 
       = title "#{@model.name} #{@record.name}  "
@@ -16,4 +16,7 @@ div id="#{dom_id(@record)}"
       br
       = @record.description
   br 
-  = render "models/locations/collection", game: @record
+  = render "partials/card_collection",
+    collection: @locations,
+    path: -> (id) { game_location_path(id, game_id: @record.id) },
+    title: 'location'

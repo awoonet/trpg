@@ -6,5 +6,7 @@
     = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
 
 div id="#{@model.name}"
-  - @model.all.each do |record|
-    = render "common/card", record: record, path: game_character_path(record.id, game_id: @game.id)
+  = render "partials/card_collection",
+    collection: @model.all,
+    path: -> (id) { game_character_path(id, game_id: @game.id) },
+    title: "character"

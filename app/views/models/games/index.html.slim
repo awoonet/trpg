@@ -5,5 +5,8 @@
     = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
 
 .row id="#{@model.name}"
-  = render "common/card_collection", collection: @model.all, path: -> (id) {game_path(id)}
+  = render "partials/card_collection",
+    collection: @model.all,
+    path: -> (id) { game_path(id) },
+    title: 'game'
 
