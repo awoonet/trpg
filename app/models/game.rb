@@ -2,6 +2,9 @@ class Game < ApplicationRecord
   has_many :locations
   has_many :characters
 
+  has_many :skills, class_name: "Belonging", inverse_of: :game 
+  has_many :items, class_name: "Belonging", inverse_of: :game 
+
   validates :name, presence: true
 
   mount_uploader :avatar, AvatarUploader
