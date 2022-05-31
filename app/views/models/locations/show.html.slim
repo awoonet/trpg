@@ -2,9 +2,17 @@
   .col
     h1 = title @record.name.humanize
   .col.text-end
-    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
+    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary mx-2" if current_user
+    = link_to "Edit #{@model.name}", @edit_path, class: "btn btn-primary mx-2" if current_user
 
 div id="#{dom_id(@record)}"
-  dl
-    dt Name:
-    dd = @record.name 
+  .row.mb-2
+    .col-9
+      h4 Description:
+      p = @record.description
+    .col-3
+      = render 'partials/avatar', record: @record
+  .row.mb-2
+    = render "models/locations/list" 
+  .row.mb-2
+    = render "models/posts/list", location: @record
