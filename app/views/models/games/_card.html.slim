@@ -1,9 +1,0 @@
-.game__avatar__overlay.d-flex.flex-column.align-items-center.justify-content-between.border.rounded.h-100
-  h5.my-3
-    = record.name
-  p 
-    = record.description
-  .mb-3.d-flex.flex-column.align-items-center
-    span.mb-2 = "NSFW" if record.nsfw
-    span.mb-2 = "Whitelisted" if record.whitelisted
-    = link_to "Go to game", path, class: "btn btn-primary"

@@ -5,12 +5,5 @@
     = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
 
 .row id="#{@model.name}"
-    - @model.all.each do |record|
-      .col-3.mb-3
-        - if record.avatar.thumb.file
-          .game__avatar.border.rounded
-            = image_tag record.avatar.thumb.file.file.gsub(/(.+)(public)/, ''), 
-              class: "card-img-top game__avatar__img", alt: "#{record.name}'s avatar"
-            = render "models/games/card", record: record, path: game_path(record.id)
-        - else 
-          = render "models/games/card", record: record, path: game_path(record.id)
+  = render "common/card_collection", collection: @model.all, path: -> (id) {game_path(id)}
+

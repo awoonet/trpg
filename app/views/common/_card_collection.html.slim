@@ -1,0 +1,8 @@
+- collection.each do |record|
+  .col-3.mb-3
+    - if record.avatar.thumb.file
+      .card__avatar.border.rounded
+        = render "partial/thumb", record: record
+        = render "common/card", record: record, path: path.(record.id)
+    - else 
+      = render "common/card", record: record, path: path.(record.id)
