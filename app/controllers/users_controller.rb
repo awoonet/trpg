@@ -1,35 +1,38 @@
 class UsersController < ApplicationController
   before_action :set_vars
+
   # GET /model
   def index
     if user_is_admin
       @records = @model.all
       render "models/#{@view}/index"
     else
-      raise ActionController::RoutingError, 'Not Found'
+      redirect_to '/error'
     end
   end
 
   # GET /model/1
   def show
     @breadcrumb["#{@record.name}"] = 'active'
+    @chars = Character.where(user_id: @record.id)
     render "models/#{@view}/show"
   end
 
   # GET /model/1/edit
-  def edit
-    redirect_to root_path unless  user_is_current_or_admin
-
-    @breadcrumb.merge({ "#{@record.name}": show_path, "Edit": 'active' })
-
-    render 'common/edit'
+  def edit    
+    if user_is_current_or_admin
+      @breadcrumb.merge({ "#{@record.name}": show_path, "Edit": 'active' })
+      render 'common/edit'
+    else
+      redirect_to '/error'
+    end
   end
 
   # PATCH/PUT /model/1
   def update
-    redirect_to root_path unless user_is_current_or_admin
-
-    if @record.update(model_params)
+    if !user_is_current_or_admin
+      redirect_to '/error'
+    elsif @record.update(model_params)
       redirect_to @show_path, notice: "#{@model.name} was successfully updated."
     else
       redirect_to @edit_path, alert: "Error! #{@model.name} was not updated."
@@ -38,10 +41,12 @@ class UsersController < ApplicationController
 
   # DELETE /model/1
   def destroy
-    redirect_to root_path unless user_is_current_or_admin
-
-    @record.destroy
-    redirect_to @index_path, notice: "#{@model.name} was successfully destroyed."
+    if user_is_current_or_admin
+      @record.destroy
+      redirect_to @index_path, notice: "#{@model.name} was successfully destroyed."
+    else
+      redirect_to '/error'
+    end
   end
 
   private
@@ -76,6 +81,6 @@ class UsersController < ApplicationController
   end
 
   def user_is_current_or_admin
-    current_user && (current_user.is_admin || curent_user.id == params[:id])
+    current_user && (current_user.is_admin || current_user.id == params[:id].to_i)
   end
 end
