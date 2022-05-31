@@ -6,9 +6,6 @@
 
 = form_with method: :post, model: @model, url: @index_path do |f|  
   = f.hidden_field :game_id, value: @game.id if @game
-  - if @model.name == 'Game'
-    = f.hidden_field :admins, value: current_user.id, multiple: true
-    = f.hidden_field :whitelist, value: current_user.id, multiple: true
 
   = render "models/#{@view}/form", f: f
 

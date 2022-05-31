@@ -2,26 +2,23 @@
   .col-8
     .mb-2
       = f.label :name, class: "form-label"
-      = f.text_field :name, class: "form-control"
+      = f.text_field :name, class: "form-control", value:"", placeholder: "Game Name"
 
     .mb-3
       = f.label :avatar, class: "form-label"
       = f.file_field :avatar, class: "form-control"
 
-    .row.mb-2 
-      .col.d-flex.justify-content-between.align-items-center
-        span NSFW
-        = f.label :nsfw, class: "switch" do
-          = f.check_box :nsfw
-          span.slider.round
-      .col.d-flex.justify-content-between.align-items-center
-        span Whitelisted
-        = f.label :whitelisted, class: "switch" do
-          = f.check_box :whitelisted
-          span.slider.round
-    div
+    .row.mb-2
+      - %i[nsfw whitelisted].each do |switch|
+        .form-check.form-switch.col.d-flex.justify-content-between.align-items-center
+          = f.label switch, class: "form-check-label"
+          = f.check_box switch, class: "form-check-input"
+    .mb-2
       = f.label :description, class: "form-label"
       = f.text_area :description, class: "form-control"
   .col-4
     = avatar_full @record
     
+- if params[:action] == "new"
+  = f.hidden_field :admins, value: current_user.id, multiple: true
+  = f.hidden_field :whitelist, value: current_user.id, multiple: true
