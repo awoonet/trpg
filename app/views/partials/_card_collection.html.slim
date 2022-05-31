@@ -3,6 +3,6 @@
     - if record.avatar.thumb.file
       .card__avatar.border.rounded
         = render "partials/thumb", record: record
-        = render "common/card", record: record, path: path.(record.id)
+        = render "partials/card", record: record, path: path.(record.id), title: title
     - else 
-      = render "common/card", record: record, path: path.(record.id)
+      = render "partials/card", record: record, path: path.(record.id), title: title
