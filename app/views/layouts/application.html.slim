@@ -6,8 +6,8 @@ html
     = display_meta_tags site: 'TRPG', reverse: true
     = render 'partials/assets'
   body
+    = render 'partials/navbar'
     .container
-      = render 'partials/navbar'
       = render 'partials/alerts'
       = render 'partials/breadcrumb'
       = yield
