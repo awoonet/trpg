@@ -1,4 +1,59 @@
-div id="#{dom_id(@record)}"
-  dl
-    dt Name:
-    dd = @record.name 
+.row.align-items-start.mb-3
+  .col
+    h1 
+      = title @record.name
+  .col.text-end.d-flex.flex-row-reverse
+    = char_back @record
+    = link_to "Edit #{@model.name}", @edit_path, class: 'btn btn-primary mx-2' if owner current_user, @record
+
+.row id="#{dom_id(@record)}"
+  .col-3
+    = avatar_full @record
+    .progress.my-3
+      .progress-bar.bg-danger style="width: #{(@record.health.to_f / @record.max_health.to_f) * 100}%;"
+        .fas.fa-heart = " #{@record.health} / #{@record.max_health}" 
+    .progress.mb-3
+      .progress-bar style="width: #{(@record.energy.to_f / @record.max_energy.to_f) * 100}%;"
+        .fa-solid.fa-wand-sparkles = " #{@record.energy} / #{@record.max_energy}"   
+    .mb-3.me-auto
+      i.fa-solid.fa-coins.text-warning
+      = "  #{@record.money}"
+  .col-9.my-2
+    = turbo_frame_tag "tabs" do
+      ul.nav.nav-tabs.nav-justified.mb-3
+        - %w[main description biography skills items].each_with_index do |tab, i|
+          li.nav-item 
+            = link_to tab.titleize, show_path(@record, tab: tab), 
+              class: "nav-link #{active_tab_link(i, tab, params)}",
+              data: { turbo_frame: "tabs" }
+
+      .m-2
+        h5 = params[:tab] ? params[:tab].titleize : "Main"
+        - case params[:tab] 
+        - when 'main', nil
+          .row.m-2
+            .col-2 Age 
+            .col-2 = @record.age
+          .row.m-2
+            .col-2 Race 
+            .col-2 = @record.race
+          .row.m-2
+            .col-2 Profession 
+            .col-2 = @record.profession
+
+        - when 'description'
+          p = @record.description
+
+        - when 'biography'
+          p = @record.biography
+
+        - when 'skills'
+          .row
+            - @record.attributes.slice(\
+              "strength", "stamina", "accuracy", "agility",
+              "intelligence", "wisdom", "will", "charm"\
+              ).each do |attr_name, attr_value|
+              .col-2 = attr_name.titleize
+              .col-1 = attr_value
+              
+        - when 'items'
