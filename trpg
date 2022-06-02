@@ -1,6 +1,9 @@
 #!/bin/bash
 
 case $1 in
+  'b'|'bundle')
+    echo 'RUN bundle install'
+    bundle install;;
   'c'|'console')
     echo 'RUN rails c'
     rails c;;
@@ -20,7 +23,9 @@ case $1 in
     echo 'RUN rails db:create'
     rails db:create
     echo 'RUN rails db:migrate'
-    rails db:migrate;;
+    rails db:migrate
+    echo 'RUN rails db:seed'
+    rails db:seed;;
   'recompile')
     echo 'RUN rm -r public/assets'
     rm -r public/assets
@@ -33,11 +38,12 @@ case $1 in
 
   'help')
     echo "
+    b, bundle   - 'bundle install'
     c, console  - 'rails c'
     g, generate - 'rails g ARGUMENTS'
     s, server   - 'rails s'
     dev         - 'bin/dev'
-    db:recreate - db drop, create and migrate
+    db:recreate - db drop, create, migrate and run seeds
     recompile   - deletes assets and runs 'rails assets:precompile'
     chown       - 'sudo chown $USER path/to/file'
     help        - shows this message
