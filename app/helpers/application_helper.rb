@@ -8,12 +8,16 @@ module ApplicationHelper
   def avatar_full record
     image_tag(
       record.avatar.file.file.gsub(/(.+)(public)/, ''), 
-      class: "img-fluid", alt: "#{record.name}'s avatar"
+      class: "img-fluid rounded", alt: "#{record.name}'s avatar"
     ) if record.avatar.file
   end
 
   def admin_access game, user
     user && (game.admins.include?(user.id) || user.is_admin)
+  end
+
+  def owner user, char
+    user && (user.id == char.user_id)
   end
 
   def come_back params
