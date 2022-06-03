@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   def edit
     @breadcrumb = { 
       "#{home_button}": @index_path, 
-      "#{@record.name}": show_path,
+      "#{@record.name}": @show_path,
       "Edit": 'active' }
     render 'common/edit'
   end
