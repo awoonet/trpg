@@ -1,6 +1,6 @@
 .row.align-items-start.mb-4
   .col
-    h1 = title "Edit #{@model.name} #{@record.name}"
+    h1 = title "Edit #{@record.name}"
   .col.text-end
     = come_back params
     = link_to "Delete #{@model.name}", @show_path, method: :delete, class: 'btn btn-danger mx-2'
