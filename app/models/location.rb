@@ -19,7 +19,7 @@ class Location < ApplicationRecord
 
   def child_locations
     if child_locations_ids
-      Locations.where(id: child_locations_ids)
+      Location.where(id: child_locations_ids)
     end
   end
 end
