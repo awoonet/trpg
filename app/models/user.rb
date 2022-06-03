@@ -10,7 +10,6 @@ class User < ApplicationRecord
   
   has_many :characters
   
-  has_many :games_admins
   has_many :games, through: :games_admins
   
   mount_uploader :avatar, AvatarUploader
