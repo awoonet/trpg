@@ -1,9 +1,9 @@
 Rails.application.routes.draw do # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   match "/404", to: "errors#not_found", via: :all
-  match "/500", to: "errors#internal_server_error", via: :all
-  match "/422", to: "errors#unprocessable", via: :all
   match "/406", to: "errors#unacceptable", via: :all
+  match "/422", to: "errors#unprocessable", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
   
   get  'login',  to: "user_sessions#new"
   post 'login',  to: "user_sessions#create"
@@ -15,5 +15,7 @@ Rails.application.routes.draw do # Define your application routes per the DSL in
     resources :locations, except: %i[index]
     resources :characters
   end
-  resources :users
+  resources :users do
+    resources :characters
+  end
 end

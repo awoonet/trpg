@@ -13,6 +13,7 @@ module TRPG
 
     config.assets.enabled = true
     config.exceptions_app = self.routes
+    config.assets.css_compressor = :sass
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
