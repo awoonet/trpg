@@ -16,13 +16,7 @@ module CharactersHelper
     end
   end
 
-  def active_tab_link i, tab, params
-    if params[:tab]
-      if tab == params[:tab]
-        'active'
-      end
-    elsif i == 0 
-      'active'
-    end
+  def active_tab_link i
+    'active' if i == 0 
   end
 end
