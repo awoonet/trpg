@@ -8,8 +8,8 @@ gem "carrierwave", "~> 2.0" # Ability to save files (images)
 gem "cssbundling-rails" # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "jbuilder" # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jsbundling-rails" # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem 'kaminari' # Pagination tool
 gem "meta-tags" # Titles of pages in title
+gem "pagy", "~> 5.10" # Pagination tool
 gem "pg", "~> 1.1" # Use postgresql as the database for Active Record
 gem "puma", "~> 5.0" # Use the Puma web server [https://github.com/puma/puma]
 gem "rails", "~> 7.0.0" # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
