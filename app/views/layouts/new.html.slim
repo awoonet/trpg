@@ -1,0 +1,10 @@
+.d-flex.justify-content-between.mb-4
+  h1.d-inline.me-auto = title "New #{@model.name}"
+  span.mx-2 = link_to "Back to Games", @index_path, class: 'btn btn-primary' 
+  
+= form_with method: :post, model: @model, url: @index_path do |f|  
+  = f.hidden_field :game_id, value: @game.id if @game
+
+  = render "models/#{@view}/form", f: f
+
+  p.text-right = f.submit "Add #{@model.name.humanize}", class: "btn btn-primary mt-3"

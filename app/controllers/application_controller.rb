@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     @breadcrumb = { 
       "#{home_button}": @index_path, 
       "New #{@model.name.humanize}": 'active' }
-    render 'common/new'
+    render 'layouts/new'
   end
 
   # GET /model/1/edit
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
       "#{home_button}": @index_path, 
       "#{@record.name}": @show_path,
       "Edit": 'active' }
-    render 'common/edit'
+    render 'layouts/edit'
   end
 
   # POST /model

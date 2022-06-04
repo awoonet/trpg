@@ -1,0 +1,15 @@
+.d-flex.justify-content-between.mb-4
+  h1.d-inline.me-auto = title "Edit #{@record.name}"
+  span.mx-2 = come_back params
+  span = link_to "Delete #{@model.name}", @show_path, class: 'btn btn-danger',
+    data: {\
+      turbo_confirm: "Are you sure that you want delete #{@model.name} #{@record.name}?",
+      turbo_method: "delete",
+    }
+    
+= form_with method: :put, model: @record, url: @show_path do |f|
+  = f.hidden_field :game_id, value: @game.id if @game
+
+  = render "models/#{@view}/form", f: f
+
+  = f.submit "Edit #{@model.name.humanize}", class: "btn btn-primary mt-3 ml-auto"
