@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def edit    
     if user_is_current_or_admin
       @breadcrumb.merge({ "#{@record.name}": show_path, "Edit": 'active' })
-      render 'common/edit'
+      render 'layouts/edit'
     else
       redirect_to '/error'
     end
