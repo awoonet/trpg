@@ -1,7 +1,7 @@
 class AddCharacters < ActiveRecord::Migration[7.0]
   def change
     create_table :characters do |t|
-      t.string :name, null: false, index: { unique: true }
+      t.string :name, null: false
       t.string :avatar
 
       t.integer :age
@@ -9,19 +9,21 @@ class AddCharacters < ActiveRecord::Migration[7.0]
       t.string :profession
 
       t.integer :health
-      t.integer :mana
+      t.integer :max_health
+      t.integer :energy
+      t.integer :max_energy
 
-      t.integer :strength
-      t.integer :stamina
-      t.integer :accuracy
-      t.integer :agility
-      t.integer :intelligence
-      t.integer :wisdom
-      t.integer :will
-      t.integer :charm
+      t.integer :strength,      default: 0
+      t.integer :stamina,       default: 0
+      t.integer :accuracy,      default: 0
+      t.integer :agility,       default: 0
+      t.integer :intelligence,  default: 0
+      t.integer :wisdom,        default: 0
+      t.integer :will,          default: 0
+      t.integer :charm,         default: 0
 
-      t.integer :money
-      t.bigint :inventory, array: true
+      t.integer :money,         default: 0
+      t.bigint :items, array: true
       t.bigint :skills, array: true
 
       t.text :description
