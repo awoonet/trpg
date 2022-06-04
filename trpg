@@ -1,6 +1,10 @@
 #!/bin/bash
 
 case $1 in
+  '')
+    echo 'RUN bin/dev'
+    bin/dev;;
+
   'b'|'bundle')
     echo 'RUN bundle install'
     bundle install;;
