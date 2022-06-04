@@ -7,4 +7,7 @@ class Character < ApplicationRecord
   validates :name, presence:  true
 
   mount_uploader :avatar, AvatarUploader
+
+  scope :for_game, -> (game_id) { where(game_id: game_id) }  
+  scope :for_user, -> (user_id) { where(user_id: user_id) }
 end
