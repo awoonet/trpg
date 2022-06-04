@@ -17,7 +17,8 @@ class CharactersController < ApplicationController
         :max_health, :energy, :max_energy, 
         :strength, :stamina, :accuracy, :agility, 
         :intelligence, :wisdom, :will, :charm,         
-        :description, :biography, items: [], skills: [])
+        :description, :biography, 
+        item_ids: [], skill_ids: [])
     end
 
     def set_vars

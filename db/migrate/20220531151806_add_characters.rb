@@ -23,8 +23,8 @@ class AddCharacters < ActiveRecord::Migration[7.0]
       t.integer :charm,         default: 0
 
       t.integer :money,         default: 0
-      t.bigint :items, array: true
-      t.bigint :skills, array: true
+      t.bigint :item_ids, array: true
+      t.bigint :skill_ids, array: true
 
       t.text :description
       t.text :biography

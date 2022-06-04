@@ -30,4 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      user:
+        one: User
+        other: Users
+    attributes:
+      character:
+        item_ids: Items
+        skill_ids: Skills

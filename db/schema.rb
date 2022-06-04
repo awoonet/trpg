@@ -33,8 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_31_152948) do
     t.integer "will", default: 0
     t.integer "charm", default: 0
     t.integer "money", default: 0
-    t.bigint "items", array: true
-    t.bigint "skills", array: true
+    t.bigint "item_ids", array: true
+    t.bigint "skill_ids", array: true
     t.text "description"
     t.text "biography"
     t.bigint "game_id"
