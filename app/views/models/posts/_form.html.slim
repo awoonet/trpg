@@ -1,0 +1,11 @@
+.d-flex
+  = avatar_thumb c
+  .w-100.d-flex.flex-column.justify-content-between.m-2
+    .w-100.d-flex.justify-content-between
+      h5 = c.name
+      div.w-50 = render 'models/characters/stat_bars', c: c, post: @post
+
+    = f.text_area :content, class: "form-control", value: @post.content
+
+    p.d-flex.justify-content-end.mb-0
+      = f.submit "Send", class: "btn btn-primary mt-2"
