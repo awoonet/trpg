@@ -1,12 +1,10 @@
-.row.align-items-start.mb-4
-  .col
-    h1 = title "#{@game.name}'s #{@model.name.pluralize}"
-  .col.text-end.d-flex.flex-row-reverse
-    = link_to "Back to Game", game_path(@game.id), class: 'btn btn-primary mx-2'
-    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
+.d-flex.justify-content-between.mb-4
+  h1.d-inline.me-auto = title "#{@game.name}'s #{@model.name.pluralize}"
+  span = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
+  span = link_to "Back to Game", game_path(@game.id), class: 'btn btn-primary mx-2'
 
 div id="#{@model.name}"
-  = render "partials/card_collection",
-    collection: @model.all,
+  = render "partials/collection",
+    collection: @records.for_game(@game.id),
     path: -> (id) { game_character_path(id, game_id: @game.id) },
     title: "character"
