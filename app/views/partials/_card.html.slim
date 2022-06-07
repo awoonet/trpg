@@ -1,9 +1,7 @@
 .card__avatar__overlay.d-flex.flex-column.align-items-center.justify-content-between.border.rounded.h-100
-  h5.my-3
-    = record.name
-  p 
-    = record.description
-  .mb-3.d-flex.flex-column.align-items-center
+  h5.m-3.text-center = record.name
+  p.m-2.text-center = record.description
+  .m-3.d-flex.flex-column.align-items-center
     = tag.span "NSFW", class: "mb-2" if record.nsfw rescue ""
     = tag.span "Whitelisted", class: "mb-2" if record.whitelisted rescue ""
-    = link_to "Go to #{title}", path, class: "btn btn-primary"
+    = link_to "Go to #{title}", path, class: "btn btn-primary", data: { turbo_frame: "_top" }
