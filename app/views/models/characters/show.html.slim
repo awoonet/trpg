@@ -1,10 +1,7 @@
-.row.align-items-start.mb-3
-  .col
-    h1 
-      = title @record.name
-  .col.text-end.d-flex.flex-row-reverse
-    = char_back @record
-    = link_to "Edit #{@model.name}", @edit_path, class: 'btn btn-primary mx-2' if owner current_user, @record
+.d-flex.justify-content-between.mb-4
+  h1.d-inline.me-auto = title @record.name
+  span = link_to "Edit #{@model.name}", @edit_path, class: 'btn btn-primary mx-2' if owner current_user, @record
+  span = char_back @record
 
 .row id="#{dom_id(@record)}"
   .col-3
@@ -19,41 +16,44 @@
       i.fa-solid.fa-coins.text-warning
       = "  #{@record.money}"
   .col-9.my-2
-    = turbo_frame_tag "tabs" do
-      ul.nav.nav-tabs.nav-justified.mb-3
-        - %w[main description biography skills items].each_with_index do |tab, i|
-          li.nav-item 
-            = link_to tab.titleize, show_path(@record, tab: tab), 
-              class: "nav-link #{active_tab_link(i, tab, params)}",
-              data: { turbo_frame: "tabs" }
+    ul.nav.nav-tabs.nav-justified.mb-3
+      - %w[main description biography skills items].each_with_index do |tab, i|
+        li.nav-item 
+          a href="##{tab}" class="nav-link #{active_tab_link(i)}" data-bs-toggle="tab" = tab.titleize
 
-      .m-2
-        h5 = params[:tab] ? params[:tab].titleize : "Main"
-        - case params[:tab] 
-        - when 'main', nil
-          .row.m-2
-            .col-2 Age 
-            .col-2 = @record.age
-          .row.m-2
-            .col-2 Race 
-            .col-2 = @record.race
-          .row.m-2
-            .col-2 Profession 
-            .col-2 = @record.profession
+    .tab-content.m-2#myTabContent
+      .tab-pane.fade.show.active#main
+        h5 Main
+        .row.m-2
+          .col-2 Age 
+          .col-2 = @record.age
+        .row.m-2
+          .col-2 Race 
+          .col-2 = @record.race
+        .row.m-2
+          .col-2 Profession 
+          .col-2 = @record.profession
 
-        - when 'description'
-          p = @record.description
+      .tab-pane.fade#description
+        h5 Description
+        p = @record.description
 
-        - when 'biography'
-          p = @record.biography
+      .tab-pane.fade#biography
+        h5 Biography
+        p = @record.biography
 
-        - when 'skills'
-          .row
-            - @record.attributes.slice(\
-              "strength", "stamina", "accuracy", "agility",
-              "intelligence", "wisdom", "will", "charm"\
-              ).each do |attr_name, attr_value|
-              .col-2 = attr_name.titleize
-              .col-1 = attr_value
-              
-        - when 'items'
+      .tab-pane.fade#skills
+        h5 Skills
+        .row.mb-3
+          - @record.attributes.slice(\
+            "strength", "stamina", "accuracy", "agility",
+            "intelligence", "wisdom", "will", "charm"\
+            ).each do |attr_name, attr_value|
+            .col-2 = attr_name.titleize
+            .col-1 = attr_value
+        
+        = render 'models/characters/belongings', belongings: @record.skills
+            
+      .tab-pane.fade#items
+        h5 Items
+        = render 'models/characters/belongings', belongings: @record.items
