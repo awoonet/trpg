@@ -1,0 +1,4 @@
+= turbo_frame_tag @post do
+
+  = form_with method: :put, model: Post, url: game_location_post_path(id: @post.id, game_id: @game.id, location_id: @location.id), class: "w-100" do |f|
+    = render 'models/posts/form', f: f, c: @char
