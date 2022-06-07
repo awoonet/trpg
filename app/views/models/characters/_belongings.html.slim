@@ -1,0 +1,12 @@
+table.table
+  thead 
+    tr 
+      th Name
+      th Type
+      th Description
+  tbody 
+    - belongings.each do |belonging|
+      tr 
+        td = belonging.name
+        td = belonging.kind
+        td = belonging.description
