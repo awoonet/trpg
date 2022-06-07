@@ -1,12 +1,10 @@
-.row.align-items-start.mb-3
-  .col
-    h1 = title @model.name.humanize.pluralize
-  .col.text-end
-    = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user
+.d-flex.justify-content-between.mb-4
+  h1.d-inline.me-auto = title @model.name.humanize.pluralize
+  span = link_to "New #{@model.name}", @new_path, class: "btn btn-primary" if current_user 
 
 .row id="#{@model.name}"
-  = render "partials/card_collection",
-    collection: @model.all,
+  = render "partials/collection",
+    collection: @records,
     path: -> (id) { game_path(id) },
     title: 'game'
 
