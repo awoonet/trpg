@@ -1,0 +1,8 @@
+= turbo_frame_tag @post do
+  - c = params[:character_id] ? @chars.find_by(id: params[:character_id]) : @chars.first
+
+  = form_with method: :post, model: Post, url: game_location_posts_path(game_id: @game.id, location_id: @location.id), class: "list-group-item mb-0" do |f|  
+    = f.hidden_field :location_id, value: @location.id
+    = f.hidden_field :character_id, value: params[:character_id]
+
+    = render 'models/posts/form', f: f, c: c
