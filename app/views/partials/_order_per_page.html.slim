@@ -1,0 +1,17 @@
+.d-flex.justify-content-between
+  div
+    - if defined?(title) && title
+      h3.mb-4 = "#{title.titleize.pluralize}:"
+  .nav.nav-pills.justify-content-end.mb-3
+    - if defined?(order) && order
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle data-bs-toggle="dropdown" Order
+        .dropdown-menu
+          - %w[name updated_at created_at].each do |order|
+            = link_to order.titleize, request.params.merge(order: order), class: "dropdown-item text-center"
+    - if defined?(items) && items
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle data-bs-toggle="dropdown" Items
+        .dropdown-menu
+          - %w[12 24 36 48 60].each do |size|
+            = link_to size, request.params.merge(items: size), class: "dropdown-item text-center"
