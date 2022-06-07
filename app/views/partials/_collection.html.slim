@@ -1,0 +1,4 @@
+= turbo_frame_tag "collection" do
+  = render "partials/order_per_page", title: title, order: true, items: true 
+  = render "partials/card_collection", collection: collection, path: path, title: title
+  = render 'partials/pagy_bootstrap', pagy: @pagy if @pagy.pages > 1
