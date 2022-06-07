@@ -12,7 +12,9 @@ Rails.application.routes.draw do # Define your application routes per the DSL in
   root "games#index" # Defines the root path route ("/")
 
   resources :games do
-    resources :locations, except: %i[index]
+    resources :locations, except: %i[index] do
+      resources :posts, except: %i[index]
+    end
     resources :characters
   end
   resources :users do
