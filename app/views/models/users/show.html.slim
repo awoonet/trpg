@@ -5,8 +5,10 @@
     = link_to "Edit #{@model.name}", @edit_path, class: "btn btn-primary"
 
 div id="#{dom_id(@record)}"
-  .row
-    .col-8
+  .row.mb-4
+    .col-3
+      = avatar_full @record
+    .col-9
       dl.row 
         - [\
             ["Name:", @record.name],
@@ -16,11 +18,10 @@ div id="#{dom_id(@record)}"
           dt.col-sm-2 = title
           dd.col-sm-10 = content
 
-    .col-4
-      = render 'partials/avatar', record: @record
-
   - unless @chars == []
-    | Characters: 
-    = render 'partals/card_collection', collection: @chars
+    = render 'partials/collection',
+      collection: @chars,
+      path: -> (id) { user_character_path(id, user_id: @record.id) },
+      title: "character"
   - else 
     p You have no characters yet! Create new in one of games.
