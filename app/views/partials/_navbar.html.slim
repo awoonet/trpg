@@ -6,11 +6,11 @@ nav.navbar.navbar-dark.bg-primary.navbar-expand-lg.mb-3
       span.navbar-toggler-icon
 
     .collapse.navbar-collapse.justify-content-between#navbarSupportedContent
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+      ul.navbar-nav.mb-2.mb-lg-0
         = nav_link games_path, "Games"
         = nav_link users_path, "Users" if current_user && current_user.is_admin
         
-      ul.navbar-nav.mr-auto.mb-2.mb-lg-0.text-end
+      ul.navbar-nav.ml-auto.mb-2.mb-lg-0
         - if current_user
           = nav_link user_path(current_user), "Hi, #{current_user.name}"
           = nav_link logout_path, "Logout"
