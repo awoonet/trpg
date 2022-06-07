@@ -1,8 +1,9 @@
-- collection.each do |record|
-  .col-3.mb-3
-    - if record.avatar.thumb.file
-      .card__avatar.border.rounded
-        = render "partials/thumb", record: record
+.row.m-auto
+  - collection.each do |record|
+    .col-12.col-md-6.col-lg-4.col-xl-3.mb-3 style="height: 400px; width:300px"
+      - if record.avatar.thumb.file
+        .card__avatar.border.rounded
+          = avatar_thumb record, height: 400
+          = render "partials/card", record: record, path: path.(record.id), title: title
+      - else 
         = render "partials/card", record: record, path: path.(record.id), title: title
-    - else 
-      = render "partials/card", record: record, path: path.(record.id), title: title
