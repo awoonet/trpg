@@ -1,0 +1,19 @@
+small.d-flex.justify-content-end
+  .progress.justify-content-between.w-50
+    - health = (c.health.to_f / c.max_health.to_f) * 100
+    .progress-bar.bg-danger#health style="width: #{health}%;"
+      = tag.div " #{c.health} / #{c.max_health}", class: "fas fa-heart" if health >= 50
+    = tag.div " #{c.health} / #{c.max_health}", class: "fas fa-heart text-danger" if health < 50
+    span
+  .progress.justify-content-between.w-50.mx-3
+    - energy = (c.energy.to_f / c.max_energy.to_f) * 100
+    .progress-bar#energy style="width: #{energy}%;"             
+      = tag.div " #{c.energy} / #{c.max_energy}", class: "fa-solid fa-wand-sparkles" if energy >= 50
+    = tag.div " #{c.energy} / #{c.max_energy}", class: "fa-solid fa-wand-sparkles text-primary" if energy < 50
+    span 
+  i.fa-solid.fa-coins.text-warning
+  span.ms-1#money = "  #{c.money}"
+  - if params[:id] && action_name == 'edit'
+    = link_to "", game_location_post_path(id: post.id, game_id: @game.id, location_id: @location.id),
+      class: "fa-solid fa-xmark text-danger ms-2", style: "text-decoration: none;",
+      data: { turbo_method: "get", turbo_frame: dom_id(post) }
