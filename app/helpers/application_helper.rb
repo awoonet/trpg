@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def nav_link path, name
     tag.li class: "nav-item" do
       link_to name, path, class: "nav-link"
@@ -6,18 +8,16 @@ module ApplicationHelper
   end
 
   def avatar_full record
-    image_tag(
-      record.avatar.file.file.gsub(/(.+)(public)/, ''), 
-      class: "img-fluid rounded", alt: "#{record.name}'s avatar"
-    ) if record.avatar.file
+    img = record.avatar.file ? record.avatar.file.file.gsub(/(.+)(public)/, '') : "placeholder.png"
+    image_tag img, id: record.id, class: "img-fluid rounded", alt: "#{record.name}'s avatar"
   end
 
-  def avatar_thumb record
-    image_tag(record.avatar.thumb.file.file.gsub(/(.+)(public)/, ''),
-      class: "card__avatar__img rounded",
-      alt: "#{record.name}'s avatar",
-      style: "height:150px;"
-      )if record.avatar.thumb.file
+  def avatar_thumb record, hash={}
+    height = hash[:height] ? hash[:height] : 150
+    img = record.avatar.thumb.file ? record.avatar.thumb.file.file.gsub(/(.+)(public)/, '') : "placeholder.png"
+    image_tag img, alt: "#{record.name}'s avatar",
+      class: "card__avatar__img rounded #{record.class.name.downcase}_#{record.id}", 
+      style: "height:#{height}px; display: #{hash[:hidden] ? 'none' : 'block'}"
   end
 
   def admin_access game, user
