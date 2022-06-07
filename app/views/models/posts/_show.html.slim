@@ -1,8 +1,23 @@
-.border.d-flex.justify-content-between.align-items-center
-  span
-    = post.updated_at.to_datetime.localtime.strftime('%R %d/%m/%Y')
-  span 
-    = link_to "Edit post", "#", class: "btn btn-primary mx-2"
-    = link_to "Delete post", "#", class: "btn btn-danger mx-2"
-.col-2.border  = render 'models/posts/post_header', post: post
-.col-10.border = render 'models/posts/post_content', post: post
+- c = post.character
+
+= avatar_thumb c
+.w-100.d-flex.flex-column.justify-content-between.m-2
+  .w-100.d-flex.justify-content-between
+    h5.mb-1 
+      = link_to post.character.name, game_character_path(c.id, @game.id), data: { turbo_frame: '_top' }
+    small 
+      - if post.updated_at != post.created_at
+        i.fa.fa-pencil
+      = post.created_at.to_datetime.localtime.strftime('  %R %d/%m/%Y')
+      = link_to "", edit_game_location_post_path(id: post.id, game_id: @game.id, location_id: post.location.id),
+          class: "text-primary fa fa-edit mx-2", style: "text-decoration: none;",
+          data: { turbo_method: "get" } if owner current_user, c
+      = link_to "", game_location_post_path(id: post.id, game_id: @game.id, location_id: post.location.id),
+          class: "text-danger fa fa-trash", style: "text-decoration: none;",
+          data: {\
+            turbo_confirm: "Are you sure that you want delete post?",
+            turbo_method: "delete",
+          } if owner current_user, c
+  p = post.content
+  
+  div.w-50.ms-auto = render 'models/characters/stat_bars', c: c, post: post
