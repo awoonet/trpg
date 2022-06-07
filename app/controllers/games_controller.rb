@@ -3,7 +3,7 @@ class GamesController < ApplicationController
 
     # GET /model/1
     def show
-      @locations = Location.for_game(@record.id)
+      @pagy, @locations = pagy(Location.for_game(@record.id).order(params[:order]), items: params[:items])
       super
     end
 

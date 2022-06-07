@@ -3,7 +3,7 @@ class CharactersController < ApplicationController
 
   # GET /model
   def index
-    @records = @model.where(game_id: params[:game_id]).all
+    @pagy, @records = pagy(@model.where(game_id: params[:game_id]).order(params[:order]), items: params[:items])
     @breadcrumb = { "#{home_button}": 'active' }
     render "models/#{@view}/index"
   end

@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :set_common_vars
+  include Pagy::Backend
 
   # GET /model
   def index
-    @records = @model.all
+    @pagy, @records = pagy(@model.order(params[:order]), items: params[:items])
     @breadcrumb = { "#{home_button}": 'active' }
     render "models/#{@view}/index"
   end
@@ -56,7 +57,7 @@ class ApplicationController < ActionController::Base
   # DELETE /model/1
   def destroy
     @record.destroy
-    redirect_to @index_path, notice: "#{@model.name} was successfully destroyed."
+    redirect_to @game_path, notice: "#{@model.name} was successfully destroyed."
   end
 
   private
@@ -67,8 +68,12 @@ class ApplicationController < ActionController::Base
 
   def set_common_vars
     if params[:game_id]
-      @game = Game.signed_in?(current_user).find_by(id: params[:game_id])
-      @game_path = game_path(@game.id)
+      @game = Game.signed_in?(current_user).find_by id: params[:game_id] 
+      @game_path = game_path @game.id 
+      @chars = Character.where(game_id: @game.id, user_id: current_user.id)
+    end
+    if params[:location_id]
+      @location = Location.find_by id: params[:location_id]
     end
   end
 

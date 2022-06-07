@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /model
   def index
     if user_is_admin
-      @records = @model.all
+      @pagy, @records = pagy(@model.all)
       render "models/#{@view}/index"
     else
       redirect_to '/error'
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   # GET /model/1
   def show
     @breadcrumb["#{@record.name}"] = 'active'
-    @chars = Character.where(user_id: @record.id)
+    @pagy, @chars = pagy(Character.where(user_id: @record.id).order(params[:order]), items: params[:items])
     render "models/#{@view}/show"
   end
 
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   def destroy
     if user_is_current_or_admin
       @record.destroy
-      redirect_to @index_path, notice: "#{@model.name} was successfully destroyed."
+      redirect_to games_path, notice: "#{@model.name} was successfully destroyed."
     else
       redirect_to '/error'
     end
