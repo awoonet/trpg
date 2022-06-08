@@ -1,4 +1,0 @@
-- if @record.child_locations
-  ul
-    - @record.child_locations.each do |location|
-      li = link_to location.name, game_location_path(location.id, @game.id)
