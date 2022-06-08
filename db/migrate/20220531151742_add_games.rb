@@ -8,6 +8,7 @@ class AddGames < ActiveRecord::Migration[7.0]
       t.boolean :nsfw, default: false
       t.boolean :whitelisted, default: false
       
+      t.bigint :game_master
       t.bigint :admins, array: true
       t.bigint :whitelist, array: true
       t.bigint :blacklist, array: true
