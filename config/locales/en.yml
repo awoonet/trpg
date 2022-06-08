@@ -30,12 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    models:
-      user:
-        one: User
-        other: Users
-    attributes:
+  helpers:
+    label:
       character:
         item_ids: Items
         skill_ids: Skills
