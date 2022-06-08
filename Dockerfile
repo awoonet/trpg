@@ -1,5 +1,4 @@
-FROM ruby:3.0.2
-RUN apt update && apt upgrade
+FROM ruby:3.0.2-slim-buster
 
 WORKDIR /app
 COPY Gemfile /app/Gemfile
