@@ -3,15 +3,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.2"
 
+gem "actionpack", ">= 7.0.2.4" # For updates due to Dependabot alerts
+gem "activestorage", ">= 7.0.2.3" # For updates due to Dependabot alerts
+gem "actionview", ">= 7.0.2.4" # For updates due to Dependabot alerts
 gem "bootsnap", require: false # Reduces boot times through caching; required in config/boot.rb
 gem "carrierwave", "~> 2.0" # Ability to save files (images)
 gem "cssbundling-rails" # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "jbuilder" # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jsbundling-rails" # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "meta-tags" # Titles of pages in title
+gem "nokogiri", ">= 1.13.6" # For updates due to Dependabot alerts
 gem "pagy", "~> 5.10" # Pagination tool
 gem "pg", "~> 1.1" # Use postgresql as the database for Active Record
 gem "puma", "~> 5.0" # Use the Puma web server [https://github.com/puma/puma]
+gem "rack", ">= 2.2.3.1" # For updates due to Dependabot alerts
 gem "rails", "~> 7.0.0" # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "redis", "~> 4.0" # Use Redis adapter to run Action Cable in production
 gem "sassc-rails" # Use Sass to process CSS

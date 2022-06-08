@@ -281,6 +281,9 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  actionpack (>= 7.0.2.4)
+  actionview (>= 7.0.2.4)
+  activestorage (>= 7.0.2.3)
   bootsnap
   capybara
   carrierwave (~> 2.0)
@@ -290,10 +293,12 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   meta-tags
+  nokogiri (>= 1.13.6)
   pagy (~> 5.10)
   pg (~> 1.1)
   pry (~> 0.13.1)
   puma (~> 5.0)
+  rack (>= 2.2.3.1)
   rails (~> 7.0.0)
   redis (~> 4.0)
   sassc-rails
