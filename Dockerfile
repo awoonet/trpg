@@ -1,9 +1,9 @@
-FROM ruby:3.0.2-slim-buster
+FROM ruby:3.0.2-alpine
 
-WORKDIR /app
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
+WORKDIR /usr/src/app
+COPY Gemfile Gemfile.lock ./
 RUN bundle config set --local without 'development test'
-RUN bundle install --without x86_64-linux
+RUN bundle install
 
+COPY . .
 CMD ["rails", "server", "-b", "0.0.0.0"]
