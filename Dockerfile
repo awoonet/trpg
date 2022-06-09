@@ -5,12 +5,14 @@ RUN apk update && \
   apk add --virtual build-dependencies build-base && \
   apk add postgresql-client postgresql-dev yarn
 
-COPY Gemfile Gemfile.lock ./
 RUN gem install bundler:2.2.30
 RUN bundle config set --local without 'development test'
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . .
+
+EXPOSE 3000
 
 RUN rails assets:precompile
 CMD rails server
