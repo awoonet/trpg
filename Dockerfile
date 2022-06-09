@@ -6,7 +6,6 @@ RUN apk update && \
   apk add postgresql-client postgresql-dev yarn
 
 COPY Gemfile Gemfile.lock ./
-RUN 
 RUN gem install bundler:2.2.30
 RUN bundle config set --local without 'development test'
 RUN bundle install
