@@ -10,4 +10,6 @@ RUN bundle config set --local without 'development test'
 RUN bundle install
 
 COPY . .
-CMD ["rails", "server", "-b", "0.0.0.0"]
+
+RUN rails assets:precompile
+CMD rails server
