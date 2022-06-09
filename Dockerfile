@@ -14,6 +14,6 @@ COPY . .
 
 EXPOSE 3000
 
-RUN rm -r ./public/assets
+RUN rm -rf ./public/assets
 RUN rails assets:precompile
 CMD rails server -b 0.0.0.0 -p 3000
